@@ -89,9 +89,17 @@ public class LeaderboardManager {
         this.updateTime = updateTimeSeconds;
     }
 
+    /**
+     * Enables the specified player to view all leaderboard holograms
+     */
+
     public void addGlobalLeaderboardViewer(@NotNull Player player) {
         leaderboardMap.forEach((id, leaderboard) -> leaderboard.show(player));
     }
+
+    /**
+     * Disables the specified player from viewing leaderboard holograms
+     */
 
     public void removeGlobalLeaderboardViewer(@NotNull Player player) {
         leaderboardMap.forEach((id, leaderboard) -> leaderboard.hide(player));
