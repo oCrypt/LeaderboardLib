@@ -1,0 +1,8 @@
+name: LeaderboardLib
+version: '${project.version}'
+main: com.cahrypt.me.leaderboardlib.LeaderboardLib
+api-version: 1.18
+authors: [ cahrypt ]
+description: Advanced leaderboard library for minecraft plugins
+depend:
+  - HolographicDisplays
