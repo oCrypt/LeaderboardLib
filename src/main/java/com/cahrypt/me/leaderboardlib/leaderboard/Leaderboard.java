@@ -68,6 +68,14 @@ public class Leaderboard <T> {
         leaderboardManager.addLeaderboard(id, this);
     }
 
+    private String buildStatLine(String playerName, int position, T stat) {
+        return statFormat
+                .replace("%player_name%", playerName)
+                .replace("%leaderboard_position%", String.valueOf(position)
+                .replace("%stat%", stat.toString())
+            );
+    }
+
     private void setupHologramLines() {
         if (upperLines != null) {
             upperLines.forEach(leaderboardLine -> leaderboardLine.apply(hologram));
@@ -82,12 +90,7 @@ public class Leaderboard <T> {
                 return;
             }
 
-            hologram.appendTextLine(statFormat
-                    .replace("%player_name%", playerName)
-                    .replace("%leaderboard_position%", String.valueOf(position.get()))
-                    .replace("%stat%", stat.toString())
-            );
-
+            hologram.appendTextLine(buildStatLine(playerName, posInt, stat));
             position.getAndIncrement();
         });
 
@@ -100,7 +103,7 @@ public class Leaderboard <T> {
         return this.id.equals(id);
     }
 
-    protected void update() {
+    protected void updateStats() {
         int startingLine = (upperLines == null ? 1 : upperLines.size());
         int endingLine = startingLine + leaderboardSize;
 
@@ -113,10 +116,7 @@ public class Leaderboard <T> {
             }
 
             hologram.removeLine(currentLine.get());
-            hologram.insertTextLine(currentLine.get(), statFormat
-                    .replace("%player_name%", playerName)
-                    .replace("%leaderboard_position%", String.valueOf(position.get()))
-                    .replace("%stat%", stat.toString()));
+            hologram.insertTextLine(currentLine.get(), buildStatLine(playerName, position.get(), stat));
             currentLine.getAndIncrement();
             position.getAndIncrement();
         });

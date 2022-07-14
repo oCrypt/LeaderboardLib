@@ -60,7 +60,7 @@ public class LeaderboardManager {
         this.updateTask = new BukkitRunnable() {
             @Override
             public void run() {
-                leaderboardMap.forEach((id, leaderboard) -> leaderboard.update());
+                leaderboardMap.forEach((id, leaderboard) -> leaderboard.updateStats());
             }
         }.runTaskTimer(JavaPlugin.getPlugin(LeaderboardLib.class), 0, updateTime * 20L);
     }
